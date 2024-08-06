@@ -240,3 +240,51 @@ export async function getUser(email: string) {
     throw new Error('Failed to fetch user.');
   }
 }
+
+export async function fetchTestCount(query: string = '', itemPerPage?: number) {
+  // Add noStore() here to prevent the response from being cached.
+  // This is equivalent to in fetch(..., {cache: 'no-store'}).
+  noStore();
+
+  try {
+    // Artificially delay a response for demo purposes.
+    // Don't do this in production :)
+
+    console.log('Fetching BE data...');
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
+    const pagingOption = itemPerPage ? `&itemPerPage=${itemPerPage}` : '';
+    const res = await fetch(`http://localhost:3000/api/count?query=${query.trim()}${pagingOption}`);
+    const data = await res.json();
+
+    // console.log('Data fetch completed after 3 seconds.');
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch revenue data.');
+  }
+}
+
+export async function fetchTest(query: string = '', currentPage: number = 0, itemPerPage?: number) {
+  // Add noStore() here to prevent the response from being cached.
+  // This is equivalent to in fetch(..., {cache: 'no-store'}).
+  noStore();
+
+  try {
+    // Artificially delay a response for demo purposes.
+    // Don't do this in production :)
+
+    console.log('Fetching BE data...');
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
+    const option = itemPerPage ? `&itemPerPage=${itemPerPage}` : '';
+    const res = await fetch(`http://localhost:3000/api/test?query=${query.trim()}&currentpage=${currentPage}${option}`);
+    const data = await res.json();
+
+    // console.log('Data fetch completed after 3 seconds.');
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch revenue data.');
+  }
+}
