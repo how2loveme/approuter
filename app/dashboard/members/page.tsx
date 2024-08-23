@@ -7,7 +7,7 @@ import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import { fetchTestCount } from '@/app/lib/data';
 import { Metadata } from 'next';
-import { Member } from '@/app/lib/definitions';
+import Grid from '@/app/ui/grid';
 
 export const metadata: Metadata = {
   title: 'Members'
@@ -38,6 +38,14 @@ export default async function Page({
       <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton/>}>
         <Table query={query} currentPage={currentPage} itemPerPage={ITEMS_PER_PAGE}/>
       </Suspense>
+      <Grid data={[
+        ['1', '직급', 1, ''],
+        ['2', '부장', 2, '1'],
+        ['3', '차장', 2, '1'],
+        ['4', '과장', 2, '1'],
+        ['5', '대리', 2, '1'],
+        ['6', '주임', 2, '1']
+      ]}/>
       <div className="mt-5 flex w-full justify-center">
         <Pagination totalPages={totalPages}/>
       </div>
